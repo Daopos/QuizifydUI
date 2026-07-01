@@ -10,6 +10,7 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { FileText, Home, Play } from "lucide-react"
+import { Link } from "react-router-dom"
 
 
 export function AppSidebar() {
@@ -29,26 +30,26 @@ export function AppSidebar() {
                     <SidebarMenu>
                         <SidebarMenuItem>
                             <SidebarMenuButton asChild className="group hover:bg-slate-900 hover:text-white">
-                                <a href="#home" className="flex items-center gap-2 text-white ">
+                                <Link to="/home" className="flex items-center gap-2 text-white ">
                                     <Home className="h-4 w-4 text-slate-400" />
                                     Home
-                                </a>
+                                </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
                             <SidebarMenuButton asChild className="group hover:bg-slate-900 hover:text-white">
-                                <a href="#article" className="flex items-center gap-2 text-white group-hover:text-white ">
+                                <Link to="/addarticle" className="flex items-center gap-2 text-white group-hover:text-white ">
                                     <FileText className="h-4 w-4 text-slate-400" />
                                     Article
-                                </a>
+                                </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
                             <SidebarMenuButton asChild className="group hover:bg-slate-900 hover:text-white">
-                                <a href="#quiz" className="flex items-center gap-2 text-white ">
+                                <Link to="/quiz" className="flex items-center gap-2 text-white ">
                                     <Play className="h-4 w-4 text-slate-400" />
                                     Quiz
-                                </a>
+                                </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     </SidebarMenu>

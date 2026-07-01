@@ -2,13 +2,13 @@ import { useState } from 'react'
 
 import './App.css'
 import HomeLayout from './layout/HomeLayout'
+import { RouterProvider } from 'react-router-dom'
+import router from './router/routes'
 
 function App() {
 
   return (
-    <>
-      <HomeLayout />
-    </>
+    <RouterProvider router={router} />
   )
 }
 
