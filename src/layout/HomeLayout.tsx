@@ -1,6 +1,5 @@
 import { AppSidebar } from "@/components/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import Home from "@/pages/Home";
 import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {

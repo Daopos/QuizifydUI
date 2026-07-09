@@ -6,6 +6,10 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 const router = createBrowserRouter([
     {
         path: "/",
+        element: <Navigate to="/home" />
+    },
+    {
+        path: "/",
         element: <HomeLayout />,
         children: [
             { path: "home", element: <Home /> },

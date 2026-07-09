@@ -7,7 +7,6 @@ const Home = () => {
             <ArticleCard />
         </div>
     )
-
 }
 
 export default Home;
