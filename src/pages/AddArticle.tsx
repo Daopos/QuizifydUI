@@ -1,3 +1,5 @@
+import { ArticleService } from "@/services/ArticleService";
+import type { CreateArticleDto } from "@/types/IArticle";
 import { useState } from "react"
 
 const categories = [
@@ -9,16 +11,20 @@ const categories = [
 ]
 
 const AddArticle = () => {
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [category, setCategory] = useState(categories[0])
-    const [tags, setTags] = useState("")
-    const [status, setStatus] = useState("Draft")
+    const [article, setArticle] = useState<CreateArticleDto>({
+        title: "",
+        description: "",
+        tags: ["te"],
+        category: "",
+        // status: "Draft",
+        // featureImageUrl: "",
+    });
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        // Replace with your submit logic
-        console.log({ title, description, category, tags, status })
+
+        await ArticleService.createArticle(article)
+
         alert("Article submitted — check console for values.")
     }
 
@@ -44,8 +50,8 @@ const AddArticle = () => {
                     <label className="space-y-2">
                         <span className="text-sm font-semibold text-slate-200">Title</span>
                         <input
-                            value={title}
-                            onChange={(event) => setTitle(event.target.value)}
+                            value={article.title}
+                            onChange={(event) => setArticle({ ...article, title: event.target.value })}
                             placeholder="Enter article title"
                             className="w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                         />
@@ -54,8 +60,8 @@ const AddArticle = () => {
                     <label className="space-y-2">
                         <span className="text-sm font-semibold text-slate-200">Description</span>
                         <textarea
-                            value={description}
-                            onChange={(event) => setDescription(event.target.value)}
+                            value={article.description}
+                            onChange={(event) => setArticle({ ...article, description: event.target.value })}
                             rows={6}
                             placeholder="Write a short summary or the article content here"
                             className="w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
@@ -66,8 +72,8 @@ const AddArticle = () => {
                         <label className="space-y-2">
                             <span className="text-sm font-semibold text-slate-200">Category</span>
                             <select
-                                value={category}
-                                onChange={(event) => setCategory(event.target.value)}
+                                value={article.category}
+                                onChange={(event) => setArticle({ ...article, category: event.target.value })}
                                 className="w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                             >
                                 {categories.map((item) => (
@@ -81,8 +87,6 @@ const AddArticle = () => {
                         <label className="space-y-2">
                             <span className="text-sm font-semibold text-slate-200">Tags</span>
                             <input
-                                value={tags}
-                                onChange={(event) => setTags(event.target.value)}
                                 placeholder="quiz, design, minimal"
                                 className="w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                             />
@@ -93,8 +97,6 @@ const AddArticle = () => {
                         <label className="space-y-2">
                             <span className="text-sm font-semibold text-slate-200">Status</span>
                             <select
-                                value={status}
-                                onChange={(event) => setStatus(event.target.value)}
                                 className="w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                             >
                                 <option value="Draft">Draft</option>
