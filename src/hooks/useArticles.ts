@@ -15,9 +15,6 @@ export function useArticles() {
   const getAllArticles = async () => {
     const articles = await ArticleService.getAllArticles();
 
-    console.log("API Response:", articles);
-    console.log("Is Array:", Array.isArray(articles));
-
     setArticles(articles);
   };
 

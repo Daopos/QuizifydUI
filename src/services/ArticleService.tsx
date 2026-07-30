@@ -15,6 +15,10 @@ export const ArticleService = {
 
         const response = await AxiosClient.get<IArticle[]>("/blog");
 
+        console.log(`${import.meta.env.VITE_APP_SERVER}`)
+        console.log(response)
+        console.log("Response from getAllArticles:", response.data);
+
         return response.data;
     }
 }
