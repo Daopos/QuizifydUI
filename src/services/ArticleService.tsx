@@ -11,12 +11,10 @@ export const ArticleService = {
         return response.data;
     },
 
-    const getAllArticles = async () => {
-        const articles = await ArticleService.getAllArticles();
+    getAllArticles: async (): Promise<IArticle[]> => {
 
-        console.log("API Response:", articles);
-        console.log("Is Array:", Array.isArray(articles));
+        const response = await AxiosClient.get<IArticle[]>("/blog");
 
-        setArticles(articles);
-    };
+        return response.data;
+    }
 }
