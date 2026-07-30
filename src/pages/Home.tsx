@@ -8,7 +8,7 @@ const Home = () => {
 
     useEffect(() => {
         getAllArticles();
-    }, [articles]);
+    }, [getAllArticles]);
 
     return (
         <div className="mx-auto max-w-6xl space-y-8">
