@@ -1,6 +1,8 @@
+import { useArticles } from "@/hooks/useArticles";
 import { ArticleService } from "@/services/ArticleService";
 import type { CreateArticleDto } from "@/types/IArticle";
 import { useState } from "react"
+import { useNavigate } from "react-router";
 
 const categories = [
     "General",
@@ -11,21 +13,30 @@ const categories = [
 ]
 
 const AddArticle = () => {
-    const [article, setArticle] = useState<CreateArticleDto>({
+    const navigate = useNavigate();
+
+    const [articleCreate, setArticleCreate] = useState<CreateArticleDto>({
         title: "",
         description: "",
-        tags: ["te"],
+        tags: "te",
         category: "",
         // status: "Draft",
         // featureImageUrl: "",
     });
 
+    const { createArticle, article } = useArticles();
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        await ArticleService.createArticle(article)
+        try {
+            await createArticle(articleCreate)
 
-        alert("Article submitted — check console for values.")
+            navigate("/home")
+        } catch (error) {
+            console.error("Error creating article:", error)
+        }
+
     }
 
     return (
@@ -50,8 +61,8 @@ const AddArticle = () => {
                     <label className="space-y-2">
                         <span className="text-sm font-semibold text-slate-200">Title</span>
                         <input
-                            value={article.title}
-                            onChange={(event) => setArticle({ ...article, title: event.target.value })}
+                            value={articleCreate.title}
+                            onChange={(event) => setArticleCreate({ ...articleCreate, title: event.target.value })}
                             placeholder="Enter article title"
                             className="w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                         />
@@ -60,8 +71,8 @@ const AddArticle = () => {
                     <label className="space-y-2">
                         <span className="text-sm font-semibold text-slate-200">Description</span>
                         <textarea
-                            value={article.description}
-                            onChange={(event) => setArticle({ ...article, description: event.target.value })}
+                            value={articleCreate.description}
+                            onChange={(event) => setArticleCreate({ ...articleCreate, description: event.target.value })}
                             rows={6}
                             placeholder="Write a short summary or the article content here"
                             className="w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
@@ -72,8 +83,8 @@ const AddArticle = () => {
                         <label className="space-y-2">
                             <span className="text-sm font-semibold text-slate-200">Category</span>
                             <select
-                                value={article.category}
-                                onChange={(event) => setArticle({ ...article, category: event.target.value })}
+                                value={articleCreate.category}
+                                onChange={(event) => setArticleCreate({ ...articleCreate, category: event.target.value })}
                                 className="w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                             >
                                 {categories.map((item) => (

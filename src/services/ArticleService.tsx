@@ -9,5 +9,12 @@ export const ArticleService = {
         const response = await AxiosClient.post<IArticle>("/blog", data);
 
         return response.data;
-    }
+    },
+
+    getAllArticles: async (): Promise<IArticle[]> => {
+
+        const response = await AxiosClient.get<IArticle[]>("/blog");
+
+        return response.data;
+    },
 }

@@ -4,7 +4,7 @@ export interface IArticle {
     title: string;
     description: string;
     category: string,
-    tags: string[];
+    tags: string;
 }
 
 export type CreateArticleDto = Omit<IArticle, 'id'>;

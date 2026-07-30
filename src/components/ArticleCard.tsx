@@ -1,5 +1,6 @@
+import type { IArticle } from "@/types/IArticle";
 
-const ArticleCard = () => {
+const ArticleCard = ({ article }: { article: IArticle }) => {
 
     return (
         <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-[0_20px_60px_-20px_rgba(15,23,42,0.8)]">
@@ -9,11 +10,10 @@ const ArticleCard = () => {
                         Featured article
                     </p>
                     <h1 className="mt-3 text-3xl font-semibold text-white">
-                        Quizifyd: Build smarter quizzes faster
+                        Quizifyd: {article.title}
                     </h1>
                     <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
-                        A clean and minimal article card that highlights the main idea, so users can
-                        immediately understand what this quiz app is about and how to get started.
+                        {article.description}
                     </p>
                 </div>
                 <div className="rounded-2xl bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-200 shadow-sm shadow-slate-900/50">
